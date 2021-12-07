@@ -171,6 +171,7 @@ void initializeRandomEnemy() {
 }
 void home() {
 	int choice = -1;
+	int tempCraftingChoice = -1;
 	if (!hasVistedHome) {
 		cout << "In your home you notice tiny glowing fragments\n"
 			<< "of the Pixie Core.  It must have exploded again.\n"
@@ -179,6 +180,7 @@ void home() {
 	}
 	if (!pixieCoreAssembled)
 	{
+		int tempPCFragmentsCollected = rand() % 10 + 1;
 		cout << "1.Sleep.\n2.Collect Pixie Core fragments.\n3.Leave\n";
 		cin >> choice;
 		switch (choice)
@@ -191,7 +193,6 @@ void home() {
 			break;
 		case 2:
 			cout << "Reaching for the glowing fragments as they wiz by tires you.\n";
-			int tempPCFragmentsCollected = rand() % 10 + 1;
 			pixieCoreFragments += tempPCFragmentsCollected;
 			if (tempPCFragmentsCollected < 5)cout << "You collected so little, but atleast you tried.\n";
 			if (tempPCFragmentsCollected > 5)cout << "You collected so many, be thankful you tried!\n";
@@ -228,7 +229,6 @@ void home() {
 					<< "tempted to use the power of the PIXIE CORE to\n"
 					<< "boost your stats.\n";
 			}
-			int tempCraftingChoice = -1;
 			cout << "1.Craft a better WEAPON\n2.CRAFT better ARMOR\n3.LEAVE the CRAFTING STATION";
 			//add switch
 			break;
@@ -239,7 +239,6 @@ void home() {
 		}
 	}
 	home();
-	return;
 }
 
 
