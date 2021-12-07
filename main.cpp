@@ -12,6 +12,13 @@ void initializeRandomEnemy();
 void fight();
 void home();
 
+//home
+bool hasVistedHome = false;
+bool pixieCoreAssembled = false;
+int pixieCoreFragments = 0;
+int pixieCoreFragmentTotal = 100;
+//	crafting
+bool hasOpenedCrafting = false;
 
 
 //player
@@ -163,7 +170,75 @@ void initializeRandomEnemy() {
 	enemyDefOriginal = enemyDef;
 }
 void home() {
-	cout << "In your home you notice tiny glowing fragments of idk lol";
+	int choice = -1;
+	if (!hasVistedHome) {
+		cout << "In your home you notice tiny glowing fragments\n"
+			<< "of the Pixie Core.  It must have exploded again.\n"
+			<< "How unfortunate, you will have to collect all of \nthem before the house has power again.\n";
+		hasVistedHome = true;
+	}
+	if (!pixieCoreAssembled)
+	{
+		cout << "1.Sleep.\n2.Collect Pixie Core fragments.\n3.Leave\n";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			cout << "You lay in your bed, alone.  You start to feel drowsy, \nbut you feel alone.  "
+				<< "You wake alone too, dreams of familiar faces\n haunt you now.  "
+				<< "You are ready to face the day.  \n";
+			//add in sleep bonuses maybe random quality influence atk and def bonus
+			break;
+		case 2:
+			cout << "Reaching for the glowing fragments as they wiz by tires you.\n";
+			int tempPCFragmentsCollected = rand() % 10 + 1;
+			pixieCoreFragments += tempPCFragmentsCollected;
+			if (tempPCFragmentsCollected < 5)cout << "You collected so little, but atleast you tried.\n";
+			if (tempPCFragmentsCollected > 5)cout << "You collected so many, be thankful you tried!\n";
+
+			if (pixieCoreFragments >= pixieCoreFragmentTotal)
+			{
+				pixieCoreAssembled = true;
+				cout << "Your Pixie Core is now assembling itself.\n"
+					<< "Your house begins humming back to life.\n"
+					<< "Your CRAFTING STATION is now OPERABLE.\n";
+			}
+			break;
+		case 3:
+			cout << "You left the house, now you are in the wild.\n";
+			return;
+			break;
+		}
+	}
+	else {
+		cout << "1.Sleep.\n2.Craft.\n3.Leave\n";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			cout << "You lay in your bed, alone.  You start to feel drowsy, \nbut you feel alone.  "
+				<< "You wake alone too, dreams of familiar faces\n haunt you now.  "
+				<< "You are ready to face the day.  \n";
+			//add in sleep bonuses maybe random quality influence atk and def bonus
+			break;
+		case 2:
+			if (!hasOpenedCrafting)
+			{
+				cout << "With an active CRAFTING STATION you are once again\n"
+					<< "tempted to use the power of the PIXIE CORE to\n"
+					<< "boost your stats.\n";
+			}
+			int tempCraftingChoice = -1;
+			cout << "1.Craft a better WEAPON\n2.CRAFT better ARMOR\n3.LEAVE the CRAFTING STATION";
+			//add switch
+			break;
+		case 3:
+			cout << "You left the house, now you are in the wild.\n";
+			return;
+			break;
+		}
+	}
+	home();
 	return;
 }
 
